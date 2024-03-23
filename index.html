@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<meta charset="UTF-8">
+<title>Add Infobox-HTML</title>
+<style>html,body{height:100%;}</style>
+
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+
+<!-- MAP[START] -->
+<h1><img src="./img/logo.png"></h1>
+<div id="myMap" style='width:100%;height:80%;margin: 0 auto;'></div>
+<!-- MAP[END] -->
+
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[keykeykey]' async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="./js/jquery-2.1.3.min.js"></script>
+<script src="./js/BmapQuery.js"></script>
+<script src="./js/facility.js"></script>
+<script>
+//****************************************************************************************
+// BingMaps&BmapQuery
+//****************************************************************************************
+//Init
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //------------------------------------------------------------------------
+    map.startMap(39.026935, 141.1239416, "grayscale", 5); //The place is Bellevue.
+
+    //----------------------------------------------------
+    //3. Add Pushpin
+    // pin(lat, lon, "color", [drag:true|false], [click:true|false], [hover:true|false], [visible:true|false]);
+    //----------------------------------------------------
+    
+
+    // });
+    
+    //----------------------------------------------------
+    //4. Add Infobox-HTML
+    // infoboxHtml(lat, lon, html);
+    //----------------------------------------------------
+//     $(document).on("click", "#tokyopin", function(){
+
+
+// console.log("ピンがクリックされました");
+//     // $("#hina_1").css(); 
+// })
+    
+    
+let JtnFacilityInfo = "";
+let JtnFacilityplace = "";
+
+let JtnFacilityLat = "";
+let JtnFacilityLon = "";
+let JtnFacilityId = "";
+for(let i=0; i<224; i++){
+
+    JtnFacilityPlace = JtnfacilityList[i].place;
+    JtnFacilityLat = JtnfacilityList[i].lat;
+    JtnFacilityLon = JtnfacilityList[i].lon;
+    JtnFacilityId = "jtn_" + i ;
+    JtnFacilityPinId = "jtnpin_" + i ;
+
+    // console.log("回:"+ i);
+    // console.log("施設名:"+ JtnFacilityPlace);
+
+// let pin = map.pinIcon(HinaLat, HinaLon, "./img/pin.png", 0.6, 14, 50);
+let pin = map.pin(JtnFacilityLat, JtnFacilityLon, "#9B323E"); 
+map.infoboxHtml(JtnFacilityLat, JtnFacilityLon, '<div id="'+ JtnFacilityId +'" class="infobox"><p class="place">' + JtnFacilityPlace + '</p></div>');
+
+}
+
+}
+
+
+
+</script>
+
+</body>
+</html>
